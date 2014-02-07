@@ -1,0 +1,6 @@
+{:name "todo"
+ :version "0.0.1"
+ :author "Trevor S. Kaufman"
+ :source ""
+ :desc "Shows Clojure TODO and FIXME comments in a tab."
+ :behaviors "todo.behaviors"}
