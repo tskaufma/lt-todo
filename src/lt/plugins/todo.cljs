@@ -33,10 +33,11 @@
    ])
 
 (defn todoLines [lines]
-  (filter #(containsAny (:line %) '("TODO" "FIXME")) lines))
+  (filter #(containsAny (:line %) '("TODO" "FIXME" "HACK")) lines))
+
 
 (defn commentLines [text]
-  (filter #(.startsWith (:line %) ";") (map-indexed (fn [idx line] {:lineNumber (inc idx) :line (string/trim line) :comment (string/trim (string/replace line ";" ""))}) (string/split-lines text))))
+  (filter #(.test #"^[(//);]" (:line %)) (map-indexed (fn [idx line] {:lineNumber (inc idx) :line (string/trim line) :comment (string/trim (string/replace line #"^[(//);]" ""))}) (string/split-lines text))))
 
 (defn containsAny [s sss]
    (reduce (fn [a b] (or a b)) (map #(.contains s %) sss)) )
